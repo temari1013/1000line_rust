@@ -1,0 +1,24 @@
+[tasks.build]
+clear = true
+category = "develop"
+description = ""
+script = [
+'''
+#!/bin/bash
+set -xue
+
+QEMU=qemu-system-riscv32
+
+cargo build --release --target riscv32i-unknown-none-elf
+
+$QEMU -machine virt -bios default -nographic -serial mon:stdio --no-reboot \
+  -d guest_errors \
+  -kernel ./target/riscv32i-unknown-none-elf/release/line1000_rust
+'''
+]
+
+[tasks.objdump]
+description = "objdump using llvm-objdump"
+script = ['''
+llvm-objdump -d ./target/riscv32i-unknown-none-elf/release/line1000_rust
+''']
