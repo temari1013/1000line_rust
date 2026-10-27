@@ -1,0 +1,83 @@
+[cargo-make] INFO - cargo make 0.37.24
+[cargo-make] INFO - 
+[cargo-make] INFO - Project: line1000_rust
+[cargo-make] INFO - Build File: Makefile.toml
+[cargo-make] INFO - Task: objdump
+[cargo-make] INFO - Profile: development
+[cargo-make] INFO - Running Task: objdump
+
+./target/riscv32i-unknown-none-elf/release/line1000_rust:	file format elf32-littleriscv
+[cargo-make] INFO - Build Done in 0.62 seconds.
+[cargo-make] INFO - cargo make 0.37.24
+[cargo-make] INFO - 
+[cargo-make] INFO - Project: line1000_rust
+[cargo-make] INFO - Build File: Makefile.toml
+[cargo-make] INFO - Task: objdump
+[cargo-make] INFO - Profile: development
+[cargo-make] INFO - Running Task: objdump
+
+./target/riscv32i-unknown-none-elf/release/line1000_rust:	file format elf32-littleriscv
+
+Disassembly of section .text:
+
+8020002c <boot>:
+8020002c: 80220537     	lui	a0, 0x80220
+80200030: 10850513     	addi	a0, a0, 0x108
+80200034: 00050113     	mv	sp, a0
+80200038: 0080006f     	j	0x80200040 <kernel_main>
+8020003c: 00008067     	ret
+
+80200040 <kernel_main>:
+80200040: ff010113     	addi	sp, sp, -0x10
+80200044: 00112623     	sw	ra, 0xc(sp)
+80200048: 802005b7     	lui	a1, 0x80200
+8020004c: 10858593     	addi	a1, a1, 0x108
+80200050: 80200537     	lui	a0, 0x80200
+80200054: 10850513     	addi	a0, a0, 0x108
+80200058: 40b50633     	sub	a2, a0, a1
+8020005c: 00261613     	slli	a2, a2, 0x2
+80200060: 00000593     	li	a1, 0x0
+80200064: 00000097     	auipc	ra, 0x0
+80200068: 00c080e7     	jalr	0xc(ra) <memset>
+8020006c: 0000006f     	j	0x8020006c <kernel_main+0x2c>
+
+80200070 <memset>:
+80200070: 01000693     	li	a3, 0x10
+80200074: 08d66263     	bltu	a2, a3, 0x802000f8 <memset+0x88>
+80200078: 40a006b3     	neg	a3, a0
+8020007c: 0036f693     	andi	a3, a3, 0x3
+80200080: 00d50733     	add	a4, a0, a3
+80200084: 00e57e63     	bgeu	a0, a4, 0x802000a0 <memset+0x30>
+80200088: 00068793     	mv	a5, a3
+8020008c: 00050813     	mv	a6, a0
+80200090: 00b80023     	sb	a1, 0x0(a6)
+80200094: fff78793     	addi	a5, a5, -0x1
+80200098: 00180813     	addi	a6, a6, 0x1
+8020009c: fe079ae3     	bnez	a5, 0x80200090 <memset+0x20>
+802000a0: 40d60633     	sub	a2, a2, a3
+802000a4: ffc67693     	andi	a3, a2, -0x4
+802000a8: 00d706b3     	add	a3, a4, a3
+802000ac: 02d77663     	bgeu	a4, a3, 0x802000d8 <memset+0x68>
+802000b0: 0ff5f793     	zext.b	a5, a1
+802000b4: 01859813     	slli	a6, a1, 0x18
+802000b8: 00879893     	slli	a7, a5, 0x8
+802000bc: 0117e8b3     	or	a7, a5, a7
+802000c0: 01079793     	slli	a5, a5, 0x10
+802000c4: 0107e7b3     	or	a5, a5, a6
+802000c8: 00f8e7b3     	or	a5, a7, a5
+802000cc: 00f72023     	sw	a5, 0x0(a4)
+802000d0: 00470713     	addi	a4, a4, 0x4
+802000d4: fed76ce3     	bltu	a4, a3, 0x802000cc <memset+0x5c>
+802000d8: 00367613     	andi	a2, a2, 0x3
+802000dc: 00c68733     	add	a4, a3, a2
+802000e0: 00e6fa63     	bgeu	a3, a4, 0x802000f4 <memset+0x84>
+802000e4: 00b68023     	sb	a1, 0x0(a3)
+802000e8: fff60613     	addi	a2, a2, -0x1
+802000ec: 00168693     	addi	a3, a3, 0x1
+802000f0: fe061ae3     	bnez	a2, 0x802000e4 <memset+0x74>
+802000f4: 00008067     	ret
+802000f8: 00050693     	mv	a3, a0
+802000fc: 00c50733     	add	a4, a0, a2
+80200100: fee562e3     	bltu	a0, a4, 0x802000e4 <memset+0x74>
+80200104: ff1ff06f     	j	0x802000f4 <memset+0x84>
+[cargo-make] INFO - Build Done in 0.60 seconds.

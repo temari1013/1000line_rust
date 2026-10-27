@@ -6,15 +6,13 @@ use core::arch::naked_asm;
 use core::panic::PanicInfo;
 use core::ptr;
 
-
-
 unsafe extern "C" {
     static  mut  __bss: u32;
     static  mut  __bss_end: u32;
     static __stack_top: u32;
 }
 
-
+#[unsafe(no_mangle)]
 fn kernel_main() {
     let bss_start = &raw mut __bss;
     let bss_end = &raw mut __bss_end ; 
@@ -24,13 +22,14 @@ fn kernel_main() {
     loop{}
 }
 
+
 #[unsafe(link_section = ".text.boot")]
-#[unsafe(naked)]
-unsafe extern "C" fn boot(){
-    naked_asm!( 
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn boot(){
+    asm!( 
         "mv sp, {stack_top}" , 
         "j {kernel_main}" , 
-        stack_top = sym __stack_top,
+        stack_top =  in(reg) &__stack_top , 
         kernel_main = sym kernel_main,
     );
 }
